@@ -1,0 +1,193 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+:root {
+  /* Backgrounds */
+  --bg-dark: hsl(214, 38%, 93%);
+  --bg: hsl(214, 38%, 97%);
+  --bg-light: #ffffff;
+  --surface: hsl(0, 0%, 97%);
+
+  /* Typography */
+  --text: hsl(215, 70%, 20%);
+  --text-muted: #5b6b82;
+
+  /* Brand */
+  --navy: hsl(215, 70%, 20%);
+  --primary: hsl(215, 55%, 35%);
+
+  /* Borders */
+  --border: hsl(214, 35%, 80%);
+
+  /* Decorative gradient — used on the hero quote panel and CTA banners */
+  --gradient: linear-gradient(
+    120deg,
+    var(--navy) 0%,
+    var(--primary) 55%,
+    var(--accent-teal) 100%
+  );
+
+  /* Legacy compatibility */
+  --color-gradient: var(--gradient);
+
+  /* Shadows (tinted with --text, not neutral black) */
+  --s-s: 0 4px 16px rgb(34 49 71 / 0.15);
+  --s-m: 0 8px 28px rgb(34 49 71 / 0.35);
+  --s-l: 0 16px 40px rgb(34 49 71 / 0.45);
+}
+
+/* =========================================
+   Tailwind Theme
+   ========================================= */
+
+@theme inline {
+  /* Colors */
+  --color-bg-dark: var(--bg-dark);
+  --color-bg: var(--bg);
+  --color-bg-light: var(--bg-light);
+  --color-surface: var(--surface);
+
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-ink: var(--text);
+
+  --color-navy: var(--navy);
+  --color-primary: var(--primary);
+  --color-border: var(--border);
+
+  /* Shadows */
+  --shadow-s: var(--s-s);
+  --shadow-m: var(--s-m);
+  --shadow-l: var(--s-l);
+
+  /* Fonts */
+  --font-heading: "Onest", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+/* =========================================
+   Base
+   ========================================= */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: auto;
+    scrollbar-gutter: stable;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  ::selection {
+    background-color: #c8dfe9;
+    color: var(--text);
+  }
+
+  section {
+    @apply scroll-mt-28 px-5 py-16
+           sm:px-8 sm:py-18
+           md:px-[8%] md:py-20
+           lg:px-[10%] lg:py-24;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.035em;
+    color: var(--text);
+  }
+
+  button,
+  nav {
+    font-family: var(--font-heading);
+  }
+
+  h1 {
+    font-weight: 500;
+    font-size: clamp(2.75rem, 4vw, 5rem);
+    line-height: 1.1;
+
+  }
+
+  h2 {
+    font-weight: 500;
+    font-size: clamp(2.1rem, 3vw, 4rem);
+    line-height: 1.15;
+  }
+
+  h3 {
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+    line-height: 1.3;
+  }
+
+  h4 {
+    font-weight: 500;
+    font-size: clamp(1.125rem, 1.4vw, 1.4rem);
+  }
+
+  p {
+    color: var(--text-muted);
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    line-height: 1.8;
+  }
+}
+
+/* =========================================
+   Components
+   ========================================= */
+
+@layer components {
+  /* Section spacing */
+  .top-section {
+    @apply pt-28 sm:pt-32 lg:pt-40;
+  }
+
+  .card {
+    @apply flex flex-col text-left bg-bg p-6 sm:p-7 rounded-2xl shadow-s;
+  }
+
+  .button {
+    @apply inline-flex items-center gap-2
+           justify-center rounded-lg
+           px-7 py-4 text-white font-medium
+           leading-none;
+
+    font-family: var(--font-heading);
+  }
+
+  .btn-primary {
+    @apply bg-primary shadow-s hover:bg-navy transition-all duration-300;
+  } 
+
+  .btn-outline {
+    @apply text-primary bg-transparent border border-primary hover:bg-primary hover:text-white transition-all duration-300;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .button-primary,
+  .button-outline {
+    transition-duration: 0.01ms !important;
+  }
+}
